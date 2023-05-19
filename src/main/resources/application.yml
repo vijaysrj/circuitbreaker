@@ -1,0 +1,32 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+resilience4j.circuitbreaker:
+  instances:
+    test1service:
+      slidingWindowType: TIME_BASED
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 20
+      failureRateThreshold: 50
+      waitDurationInOpenState: 20s
+      permittedNumberOfCallsInHalfOpenState: 4
+
+    test2service:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 4
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 2
+      waitDurationInOpenState: 20s
+      failureRateThreshold: 50
+      slowCallRateThreshold: 100
+      slowCallDurationThreshold: 2000
+    test3service:
+      slidingWindowType: COUNT_BASED
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 5
+      failureRateThreshold: 50
+      waitDurationInOpenState: 20s
+      permittedNumberOfCallsInHalfOpenState: 4
